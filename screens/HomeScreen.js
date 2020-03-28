@@ -15,7 +15,7 @@ const categories = [
   { id: 9, title: 'Originales de Expoflix', page: 8 },
 ];
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
   return (
     <View style={styles.container}>
       <FlatList
