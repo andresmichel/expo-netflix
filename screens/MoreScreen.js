@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, Text, FlatList, StyleSheet } from 'react-native';
+import * as Icon from '../components/Icon';
 
 const profiles = [
     { id: 1, image: require('../assets/images/avatars/avatar-1.png'), name: 'Andres', active: true },
@@ -10,10 +11,10 @@ const profiles = [
 ];
 
 const settings = [
-    { title: 'Mi lista' },
-    { title: 'Configuracion de App' },
-    { title: 'Cuenta' },
-    { title: 'Ayuda' },
+    { id: 1, icon: Icon.Check, title: 'Mi lista' },
+    { id: 1, icon: Icon.Settings, title: 'Configuracion de App' },
+    { id: 1, icon: Icon.Account, title: 'Cuenta' },
+    { id: 1, icon: Icon.Help, title: 'Ayuda' },
 ];
 
 function Separator() {
@@ -56,6 +57,7 @@ export default function MoreScreen(props) {
                     ))}
                 </View>
                 <View style={styles.profileEditContainer}>
+                    <Icon.Edit style={styles.profileEditIcon} />
                     <Text style={styles.profileEditLabel}>Administrar perfiles</Text>
                 </View>
             </View>
@@ -64,8 +66,9 @@ export default function MoreScreen(props) {
                 ItemSeparatorComponent={Separator}
                 renderItem={({ item }) => (
                     <View style={styles.settingsItem}>
-                        <View style={styles.settingsIcon} />
+                        <item.icon />
                         <Text style={styles.settingsItemLabel}>{item.title}</Text>
+                        <Icon.ChevronMini style={styles.settingsChevron} />
                     </View>
                 )}
                 ListFooterComponent={Footer}
@@ -115,9 +118,14 @@ const styles = StyleSheet.create({
         color: '#FEFFFE',
     },
     profileEditContainer: {
+        flexDirection: 'row',
         marginTop: 50,
         marginBottom: 26,
+        justifyContent: 'center',
         alignItems: 'center',
+    },
+    profileEditIcon: {
+        marginRight: 6,
     },
     profileEditLabel: {
         color: '#B2B2B2',
@@ -135,10 +143,8 @@ const styles = StyleSheet.create({
         marginLeft: 9,
         color: '#B3B3B3',
     },
-    settingsIcon: {
-        height: 24,
-        width: 24,
-        backgroundColor: '#B3B3B3',
+    settingsChevron: {
+        marginLeft: 'auto',
     },
     separator: {
         height: 2,
