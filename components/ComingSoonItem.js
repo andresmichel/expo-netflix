@@ -9,7 +9,7 @@ function CategorySeparator() {
 export default function ComingSoonItem(props) {
     return (
         <View style={styles.container}>
-            <View style={styles.videoWrapper}>
+            <View style={styles.imageWrapper}>
                 <Image
                     style={styles.image}
                     source={{ uri: `http://image.tmdb.org/t/p/w500/${props.backdrop_path}` }} />
@@ -42,15 +42,26 @@ export default function ComingSoonItem(props) {
                     keyExtractor={item => item}
                 />
             </View>
+            {props.disabled && <View style={styles.overlay} />}
         </View>
     );
 }
+
+ComingSoonItem.defaultProps = {
+    disabled: false,
+};
 
 const styles = StyleSheet.create({
     container: {
         // 
     },
-    videoWrapper: {
+    overlay: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.7)',
+    },
+    imageWrapper: {
         marginVertical: 15,
     },
     image: {
