@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Image, Text, FlatList, StyleSheet } from 'react-native';
+import {
+    View,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    Image,
+    Text,
+    FlatList,
+    StyleSheet,
+} from 'react-native';
 import * as Icon from '../components/Icon';
 
 const profiles = [
@@ -24,9 +32,26 @@ function Separator() {
 function Footer() {
     return (
         <View style={styles.footerContainer}>
-            <Text style={styles.logoutLabel}>Cerrar sesion</Text>
+            <TouchableOpacity>
+                <Text style={styles.logoutLabel}>Cerrar sesion</Text>
+            </TouchableOpacity>
             <Text style={styles.versionLabel}>Version: 12.24.0 (3028)</Text>
         </View>
+    )
+}
+
+function SettingItem(props) {
+    const [isActive, setActive] = useState(false);
+    return (
+        <TouchableWithoutFeedback
+            onPressIn={() => setActive(true)}
+            onPressOut={() => setActive(false)}>
+            <View style={[styles.settingsItem, isActive && styles.settingsItemActive]}>
+                <props.icon />
+                <Text style={styles.settingsItemLabel}>{props.title}</Text>
+                <Icon.ChevronMini style={styles.settingsChevron} />
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -57,20 +82,16 @@ export default function MoreScreen(props) {
                     ))}
                 </View>
                 <View style={styles.profileEditContainer}>
-                    <Icon.Edit style={styles.profileEditIcon} />
-                    <Text style={styles.profileEditLabel}>Administrar perfiles</Text>
+                    <TouchableOpacity style={styles.profileEditButton}>
+                        <Icon.Edit style={styles.profileEditIcon} />
+                        <Text style={styles.profileEditLabel}>Administrar perfiles</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             <FlatList
                 data={settings}
                 ItemSeparatorComponent={Separator}
-                renderItem={({ item }) => (
-                    <View style={styles.settingsItem}>
-                        <item.icon />
-                        <Text style={styles.settingsItemLabel}>{item.title}</Text>
-                        <Icon.ChevronMini style={styles.settingsChevron} />
-                    </View>
-                )}
+                renderItem={({ item }) => <SettingItem {...item} />}
                 ListFooterComponent={Footer}
                 keyExtractor={item => item.title}
             />
@@ -118,10 +139,12 @@ const styles = StyleSheet.create({
         color: '#FEFFFE',
     },
     profileEditContainer: {
-        flexDirection: 'row',
         marginTop: 50,
         marginBottom: 26,
-        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    profileEditButton: {
+        flexDirection: 'row',
         alignItems: 'center',
     },
     profileEditIcon: {
@@ -139,8 +162,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         backgroundColor: '#121212',
     },
+    settingsItemActive: {
+        backgroundColor: '#262626',
+    },
     settingsItemLabel: {
         marginLeft: 9,
+        fontSize: 16,
         color: '#B3B3B3',
     },
     settingsChevron: {
