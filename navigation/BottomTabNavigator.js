@@ -3,6 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
+import ComingSoonScreen from '../screens/ComingSoonScreen';
+import DownloadsScreen from '../screens/DownloadsScreen';
+import MoreScreen from '../screens/MoreScreen';
 import * as Icon from '../components/Icon';
 
 const BottomTab = createBottomTabNavigator();
@@ -45,7 +48,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Coming soon"
-        component={SearchScreen}
+        component={ComingSoonScreen}
         options={{
           title: 'Coming soon',
           tabBarIcon: ({ focused }) => <Icon.CommingSoon focused={focused} />,
@@ -53,7 +56,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Downloads"
-        component={SearchScreen}
+        component={DownloadsScreen}
         options={{
           title: 'Downloads',
           tabBarIcon: ({ focused }) => <Icon.Downloads focused={focused} />,
@@ -61,7 +64,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="More"
-        component={SearchScreen}
+        component={MoreScreen}
         options={{
           title: 'More',
           tabBarIcon: ({ focused }) => <Icon.More focused={focused} />,

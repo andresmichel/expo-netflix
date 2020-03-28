@@ -12,6 +12,7 @@ export default function SearchScreen(props) {
                     <View style={styles.inputWrapper}>
                         <Icon.Search style={{ left: 10, position: 'absolute' }} />
                         <TextInput
+                            keyboardAppearance={'dark'}
                             value={search}
                             onChangeText={text => setSearch(text)}
                             onFocus={() => setFocused(true)}
