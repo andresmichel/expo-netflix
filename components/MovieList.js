@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import MovieItem from './MovieItem';
 
+function Separator() {
+    return <View style={{ marginRight: 8 }} />;
+}
+
 export default function MovieList(props) {
     const [data, setData] = useState([]);
     const request = async () => {
@@ -23,6 +27,7 @@ export default function MovieList(props) {
                 contentContainerStyle={styles.listContainer}
                 horizontal
                 data={data}
+                ItemSeparatorComponent={Separator}
                 showsHorizontalScrollIndicator={false}
                 keyExtractor={(_, index) => String(index)}
                 renderItem={({ item, index }) => <MovieItem key={index} {...item} />}

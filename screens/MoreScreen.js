@@ -67,9 +67,11 @@ export default function MoreScreen(props) {
                             key={profile.id}
                             style={[styles.profileItem, profile.styles]}
                             onPress={() => setProfile(index)}>
-                            <Image
-                                style={[styles.profileAvatar, isActive(index) && styles.profileAvatarActive]}
-                                source={profile.image} />
+                            <View style={[styles.profileAvatarWrapper, isActive(index) && styles.profileAvatarActive]}>
+                                <Image
+                                    style={styles.profileAvatar}
+                                    source={profile.image} />
+                            </View>
                             <Text
                                 numberOfLines={1}
                                 style={[
@@ -118,15 +120,22 @@ const styles = StyleSheet.create({
     profileItem: {
         marginRight: 15,
     },
+    profileAvatarWrapper: {
+        height: 60,
+        width: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: 'transparent',
+        borderRadius: 5,
+    },
     profileAvatar: {
         height: 56,
         width: 56,
-        borderRadius: 5,
+        borderRadius: 4,
     },
     profileAvatarActive: {
-        borderWidth: 2,
         borderColor: '#FFFFFE',
-        transform: [{ scale: 60 / 56 }], // Outside border fix
     },
     profileLabel: {
         marginTop: 7,

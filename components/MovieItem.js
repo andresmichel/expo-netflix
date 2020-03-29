@@ -12,7 +12,6 @@ export default function MovieItem(props) {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'rgba(255,255,255,0.1)',
-        marginRight: 8,
         height: 158,
         width: 110,
     },

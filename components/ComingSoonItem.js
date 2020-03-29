@@ -1,12 +1,16 @@
 import React from 'react';
+import { useSpring, animated } from 'react-spring';
 import { View, Image, Text, FlatList, StyleSheet } from 'react-native';
 import * as Icon from './Icon';
 
+const AnimatedView = animated(View);
+
 function CategorySeparator() {
-    return <View style={styles.categorySeparator} />
+    return <View style={styles.categorySeparator} />;
 }
 
 export default function ComingSoonItem(props) {
+    const overlayStyle = useSpring({ opacity: props.disabled ? 1 : 0, from: { opacity: 1 } })
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
@@ -42,7 +46,9 @@ export default function ComingSoonItem(props) {
                     keyExtractor={item => item}
                 />
             </View>
-            {props.disabled && <View style={styles.overlay} />}
+            <AnimatedView
+                style={[styles.overlay, overlayStyle]}
+                pointerEvents={props.disabled ? 'none' : 'auto'} />
         </View>
     );
 }
