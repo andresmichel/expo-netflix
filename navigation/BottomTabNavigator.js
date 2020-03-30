@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
+import DetailsScreen from '../screens/DetailsScreen';
 import SearchScreen from '../screens/SearchScreen';
 import ComingSoonScreen from '../screens/ComingSoonScreen';
 import DownloadsScreen from '../screens/DownloadsScreen';
@@ -9,6 +11,17 @@ import * as Icon from '../components/Icon';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
+
+const Stack = createStackNavigator();
+
+function HomeStack(props) {
+  return (
+    <Stack.Navigator headerMode={'none'} mode={'modal'}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
+    </Stack.Navigator >
+  );
+}
 
 export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
@@ -31,7 +44,7 @@ export default function BottomTabNavigator({ navigation, route }) {
     }}>
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           title: 'Home',
           tabBarIcon: ({ focused }) => <Icon.Home focused={focused} />,
