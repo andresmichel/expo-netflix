@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import { View, Image, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Image, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import * as Icon from './Icon';
 
 const AnimatedView = animated(View);
@@ -10,7 +10,7 @@ function CategorySeparator() {
 }
 
 export default function ComingSoonItem(props) {
-    const overlayStyle = useSpring({ opacity: props.disabled ? 1 : 0, from: { opacity: 1 } })
+    const overlayStyle = useSpring({ opacity: props.disabled ? 1 : 0, from: { opacity: 1 } });
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
@@ -24,31 +24,31 @@ export default function ComingSoonItem(props) {
                         <Text numberOfLines={2} style={styles.logoLabel}>{props.title}</Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <View style={styles.button}>
+                        <TouchableOpacity style={styles.button}>
                             <Icon.Plus />
-                            <Text style={styles.buttonLabel}>Mi lista</Text>
-                        </View>
-                        <View style={styles.button}>
+                            <Text style={styles.buttonLabel}>My List</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button}>
                             <Icon.Share />
-                            <Text style={styles.buttonLabel}>Compartir</Text>
-                        </View>
+                            <Text style={styles.buttonLabel}>Share</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <Text style={styles.label}>Estreno el miercoles</Text>
+                <Text style={styles.label}>Coming Wednesday</Text>
                 <Text style={styles.title}>{props.title}</Text>
                 <Text style={styles.overview} numberOfLines={3}>{props.overview}</Text>
                 <FlatList
                     ItemSeparatorComponent={CategorySeparator}
                     scrollEnabled={false}
                     horizontal
-                    data={['Magico', 'Pelicula de anime', 'Anime de fantasia', 'Infantil y familiar']}
+                    data={['Magical', 'Anime Feature', 'Fantasy Anime', 'Children & Family']}
                     renderItem={({ item }) => <Text style={styles.category}>{item}</Text>}
                     keyExtractor={item => item}
                 />
             </View>
             <AnimatedView
                 style={[styles.overlay, overlayStyle]}
-                pointerEvents={props.disabled ? 'none' : 'auto'} />
+                pointerEvents={props.disabled ? 'auto' : 'none'} />
         </View>
     );
 }

@@ -16,19 +16,29 @@ const Stack = createStackNavigator();
 
 function HomeStack(props) {
   return (
-    <Stack.Navigator headerMode={'none'} mode={'modal'}>
+    <Stack.Navigator
+      headerMode={'none'}
+      mode={'modal'}
+      screenOptions={{ gestureEnabled: false }}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
-    </Stack.Navigator >
+    </Stack.Navigator>
   );
 }
 
-export default function BottomTabNavigator({ navigation, route }) {
-  // Set the header title on the parent stack navigator depending on the
-  // currently active tab. Learn more in the documentation:
-  // https://reactnavigation.org/docs/en/screen-options-resolution.html
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+function SearchStack(props) {
+  return (
+    <Stack.Navigator
+      headerMode={'none'}
+      mode={'modal'}
+      screenOptions={{ gestureEnabled: false }}>
+      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name="Details" component={DetailsScreen} />
+    </Stack.Navigator>
+  );
+}
 
+export default function BottomTabNavigator(props) {
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME} tabBarOptions={{
       activeTintColor: '#fff',
@@ -52,17 +62,17 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Search"
-        component={SearchScreen}
+        component={SearchStack}
         options={{
           title: 'Search',
           tabBarIcon: ({ focused }) => <Icon.Search focused={focused} />,
         }}
       />
       <BottomTab.Screen
-        name="Coming soon"
+        name="Coming Soon"
         component={ComingSoonScreen}
         options={{
-          title: 'Coming soon',
+          title: 'Coming Soon',
           tabBarIcon: ({ focused }) => <Icon.CommingSoon focused={focused} />,
         }}
       />
@@ -84,15 +94,4 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
     </BottomTab.Navigator>
   );
-}
-
-function getHeaderTitle(route) {
-  const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
-  switch (routeName) {
-    case 'Home':
-      return 'How to get started';
-    case 'Links':
-      return 'Links to learn more';
-  }
 }

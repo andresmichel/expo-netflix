@@ -8,10 +8,10 @@ export default function DownloadsScreen(props) {
             <View style={styles.circle}>
                 <Icon.Downloads width={80} height={80} />
             </View>
-            <Text style={styles.title}>Nunca te quedes sin Netflix</Text>
-            <Text style={styles.label}>Descarga programas y peliculas para que nunca te falte algo para ver, aunque estes offline.</Text>
+            <Text style={styles.title}>Never be without Netflix</Text>
+            <Text style={styles.label}>Download shows and movies so you'll never be without something to watch - even when you're offline.</Text>
             <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonLabel}>Ver que puedes descargar</Text>
+                <Text style={styles.buttonLabel}>See What You Can Download</Text>
             </TouchableOpacity>
         </View>
     );

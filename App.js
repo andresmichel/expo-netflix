@@ -36,16 +36,13 @@ export default function App(props) {
         });
 
         const images = [
-          require('./assets/images/covers/12-angry-men.jpg'),
-          require('./assets/images/covers/pulp-fiction.jpg'),
-          require('./assets/images/covers/schindlers-list.jpg'),
-          require('./assets/images/covers/the-dark-knight.jpg'),
-          require('./assets/images/covers/the-fellowship-of-the-ring.jpg'),
-          require('./assets/images/covers/the-god-father-part-ii.jpg'),
-          require('./assets/images/covers/the-godfather.jpg'),
-          require('./assets/images/covers/the-good-the-bad-the-ugly.jpg'),
-          require('./assets/images/covers/the-return-of-the-king.jpg'),
-          require('./assets/images/covers/the-shawshank-redemption.jpg'),
+          require('./assets/images/logo.png'),
+          require('./assets/images/avatars/avatar-1.png'),
+          require('./assets/images/avatars/avatar-1.png'),
+          require('./assets/images/avatars/avatar-2.png'),
+          require('./assets/images/avatars/avatar-3.png'),
+          require('./assets/images/avatars/avatar-4.png'),
+          require('./assets/images/avatars/avatar-5.png'),
         ];
 
         images.map(image => {

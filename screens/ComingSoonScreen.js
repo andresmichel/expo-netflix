@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import ComingSoonItem from '../components/ComingSoonItem';
 import * as Icon from '../components/Icon';
 
@@ -7,13 +7,13 @@ const ITEM_HEIGHT = 460;
 const HEADER_HEIGHT = 70;
 const CONTENT_OFFSET = 70;
 
-function OpenNotifications() {
+function NotificationButton() {
     return (
-        <View style={styles.notificationItem}>
+        <TouchableOpacity style={styles.notificationItem}>
             <Icon.Bell />
-            <Text style={styles.notificationLabel}>Notificaciones</Text>
+            <Text style={styles.notificationLabel}>Notifications</Text>
             <Icon.Chevron style={{ marginLeft: 'auto', marginRight: 3 }} />
-        </View>
+        </TouchableOpacity>
     );
 }
 
@@ -42,7 +42,7 @@ export default function ComingSoonScreen(props) {
                 }}
                 data={data}
                 contentContainerStyle={{ paddingTop: 44 }}
-                ListHeaderComponent={OpenNotifications}
+                ListHeaderComponent={NotificationButton}
                 renderItem={({ item, index }) => <ComingSoonItem {...item} disabled={index !== activeItem} />}
                 keyExtractor={movie => String(movie.id)}
             />

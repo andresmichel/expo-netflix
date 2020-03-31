@@ -11,18 +11,18 @@ import {
 import * as Icon from '../components/Icon';
 
 const profiles = [
-    { id: 1, image: require('../assets/images/avatars/avatar-1.png'), name: 'Andres', active: true },
-    { id: 2, image: require('../assets/images/avatars/avatar-2.png'), name: 'Sara y Andrea', active: false },
-    { id: 3, image: require('../assets/images/avatars/avatar-3.png'), name: 'Elsa', active: false },
-    { id: 4, image: require('../assets/images/avatars/avatar-4.png'), name: 'Ari', active: false },
-    { id: 5, image: require('../assets/images/avatars/avatar-5.png'), name: 'Elias', active: false, styles: { marginRight: 0 } },
+    { id: 1, image: require('../assets/images/avatars/avatar-1.png'), name: 'Rick', active: true },
+    { id: 2, image: require('../assets/images/avatars/avatar-2.png'), name: 'Morty', active: false },
+    { id: 3, image: require('../assets/images/avatars/avatar-3.png'), name: 'Summer', active: false },
+    { id: 4, image: require('../assets/images/avatars/avatar-4.png'), name: 'Beth', active: false },
+    { id: 5, image: require('../assets/images/avatars/avatar-5.png'), name: 'Squanchy', active: false, styles: { marginRight: 0 } },
 ];
 
 const settings = [
-    { id: 1, icon: Icon.Check, title: 'Mi lista' },
-    { id: 1, icon: Icon.Settings, title: 'Configuracion de App' },
-    { id: 1, icon: Icon.Account, title: 'Cuenta' },
-    { id: 1, icon: Icon.Help, title: 'Ayuda' },
+    { id: 1, icon: Icon.Check, title: 'My List' },
+    { id: 2, icon: Icon.Settings, title: 'App Settings' },
+    { id: 3, icon: Icon.Account, title: 'Account' },
+    { id: 4, icon: Icon.Help, title: 'Help' },
 ];
 
 function Separator() {
@@ -33,9 +33,9 @@ function Footer() {
     return (
         <View style={styles.footerContainer}>
             <TouchableOpacity>
-                <Text style={styles.logoutLabel}>Cerrar sesion</Text>
+                <Text style={styles.logoutLabel}>Sign Out</Text>
             </TouchableOpacity>
-            <Text style={styles.versionLabel}>Version: 12.24.0 (3028)</Text>
+            <Text style={styles.versionLabel}>Version: 12.24.0 (3028) 5.0.1-001</Text>
         </View>
     )
 }
@@ -86,7 +86,7 @@ export default function MoreScreen(props) {
                 <View style={styles.profileEditContainer}>
                     <TouchableOpacity style={styles.profileEditButton}>
                         <Icon.Edit style={styles.profileEditIcon} />
-                        <Text style={styles.profileEditLabel}>Administrar perfiles</Text>
+                        <Text style={styles.profileEditLabel}>Manage Profiles</Text>
                     </TouchableOpacity>
                 </View>
             </View>

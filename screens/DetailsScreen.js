@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, ScrollView, Image, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    FlatList,
+    ScrollView,
+    Image,
+    StyleSheet,
+    ActivityIndicator,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Icon from '../components/Icon';
@@ -9,6 +18,7 @@ function Separator() {
 }
 
 export default function DetailsScreen(props) {
+    let goingBack = false;
     const [data, setData] = useState(null);
     const [recommendations, setRecommendations] = useState([]);
     const navigation = useNavigation();
@@ -28,24 +38,39 @@ export default function DetailsScreen(props) {
     useEffect(() => {
         request();
     }, []);
-    if (!data) return <View style={styles.container} />;
+    if (!data) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size={'large'} />
+            </View>
+        );
+    };
     return (
         <View style={styles.container}>
             <View style={styles.backgroundImageWrapper}>
-                <Image blurRadius={50} style={styles.backgroundImage} source={{ uri: `http://image.tmdb.org/t/p/w500/${data.poster_path}` }} />
+                <Image blurRadius={20} style={styles.backgroundImage} source={{ uri: `http://image.tmdb.org/t/p/w500/${data.poster_path}` }} />
                 <LinearGradient
-                    colors={['rgba(0,0,0,0.4)', 'rgba(0,0,0,0.4)', '#000']}
+                    colors={['rgba(0,0,0,0.55)', 'rgba(0,0,0,0.55)', '#000']}
+                    locations={[0, 0.7, 1]}
                     style={styles.backgroundImageOverlay} />
             </View>
-            <ScrollView>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                scrollEventThrottle={32}
+                onScroll={({ nativeEvent }) => {
+                    if (!goingBack && nativeEvent.contentOffset.y < -100) {
+                        goingBack = true;
+                        navigation.goBack();
+                    }
+                }}>
                 <View style={styles.coverWrapper}>
                     <Image style={styles.cover} source={{ uri: `http://image.tmdb.org/t/p/w500/${data.poster_path}` }} />
                 </View>
                 <View style={styles.infoContainer}>
-                    <Text style={styles.infoGreenText}>98% de coincidencia</Text>
+                    <Text style={styles.infoGreenText}>98% match</Text>
                 </View>
                 <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Reproducir</Text>
+                    <Text style={styles.buttonText}>Play</Text>
                 </TouchableOpacity>
                 <Text style={styles.text} numberOfLines={3}>{data.overview}</Text>
                 <View style={{ marginTop: 10, marginHorizontal: 10 }}>
@@ -55,11 +80,11 @@ export default function DetailsScreen(props) {
                 <View style={styles.actionsContainer}>
                     <TouchableOpacity style={styles.actionButton}>
                         <Icon.Plus />
-                        <Text style={styles.actionLabel}>Mi lista</Text>
+                        <Text style={styles.actionLabel}>My List</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.actionButton}>
                         <Icon.Share />
-                        <Text style={styles.actionLabel}>Compartir</Text>
+                        <Text style={styles.actionLabel}>Share</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.tabsContainer}>
@@ -71,7 +96,6 @@ export default function DetailsScreen(props) {
                     style={styles.recomendationContainer}
                     scrollEnabled={false}
                     numColumns={3}
-                    showsVerticalScrollIndicator={false}
                     columnWrapperStyle={styles.recomendationColumn}
                     ItemSeparatorComponent={Separator}
                     data={recommendations}
@@ -97,6 +121,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#000',
     },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#000',
+    },
     closeButton: {
         position: 'absolute',
         top: 54,
@@ -111,14 +141,14 @@ const styles = StyleSheet.create({
     backgroundImageWrapper: {
         position: 'absolute',
         width: '100%',
-        height: 595,
+        height: 499,
         alignItems: 'center',
     },
     backgroundImage: {
         width: 463 / 1,
         height: 759 / 1,
         transform: [
-            { translateY: -164 }
+            { translateY: -260 }
         ],
     },
     backgroundImageOverlay: {

@@ -1,23 +1,26 @@
 import * as React from 'react';
-import { Image, View, Text, StyleSheet } from 'react-native';
+import { Image, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import logo from '../assets/images/logo.png';
 
-function Header(props) {
+function Menu(props) {
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={logo} />
-            <Text style={styles.item}>Programas</Text>
-            <Text style={styles.item}>Películas</Text>
-            <Text style={styles.item}>Mi lista</Text>
+            <TouchableOpacity>
+                <Text style={styles.item}>Series</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Text style={styles.item}>Movies</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Text style={styles.item}>My List</Text>
+            </TouchableOpacity>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 0,
-        width: '100%',
         paddingTop: 44,
         paddingLeft: 10,
         height: 88,
@@ -36,4 +39,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Header;
+export default Menu;
