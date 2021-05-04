@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StatusBar, StyleSheet, View, YellowBox } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, LogBox } from 'react-native';
 import { SplashScreen } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
@@ -12,7 +12,7 @@ import useLinking from './navigation/useLinking';
 
 const Stack = createStackNavigator();
 
-YellowBox.ignoreWarnings(['VirtualizedLists']);
+LogBox.ignoreAllLogs();
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
