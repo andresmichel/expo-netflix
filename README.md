@@ -1,2 +1,15 @@
 # expo-netflix
-Expo Netflix UI
+
+Expo Netflix React Native App
+
+## Setup
+
+```sh
+yarn install
+```
+
+## Usage
+
+```sh
+yarn start
+```
